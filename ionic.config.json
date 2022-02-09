@@ -1,0 +1,8 @@
+{
+  "name": "CarWatcher",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "df90f84c"
+}
