@@ -1,0 +1,41 @@
+#view-vehicle-page ion-item {
+  --inner-padding-end: 0;
+  --background: transparent;
+}
+
+#view-vehicle-page ion-label {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+#view-vehicle-page ion-item h2 {
+  font-weight: 600;
+}
+
+#view-vehicle-page ion-item .info {
+  float: right;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#view-vehicle-page ion-item ion-icon {
+  font-size: 42px;
+  margin-right: 8px;
+}
+
+#view-vehicle-page ion-item ion-note {
+  font-size: 15px;
+  margin-right: 12px;
+  font-weight: normal;
+}
+
+#view-vehicle-page h1 {
+  margin: 0;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+#view-vehicle-page p {
+  line-height: 22px;
+}

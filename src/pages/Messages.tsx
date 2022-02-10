@@ -1,6 +1,6 @@
-import VehicleListItem from '../components/VehicleListItem';
+import MessageListItem from '../components/MessageListItem';
 import { useState } from 'react';
-import { Vehicle, getVehicles } from '../data/vehicles';
+import { Message, getMessages } from '../data/messages';
 import {
   IonContent,
   IonHeader,
@@ -12,15 +12,15 @@ import {
   IonToolbar,
   useIonViewWillEnter
 } from '@ionic/react';
-import './Home.css';
+import './Messages.css';
 
-const Home: React.FC = () => {
+const Messages: React.FC = () => {
 
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   useIonViewWillEnter(() => {
-    const vehiclesList = getVehicles();
-    setVehicles(vehiclesList);
+    const msgs = getMessages();
+    setMessages(msgs);
   });
 
   const refresh = (e: CustomEvent) => {
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
     <IonPage id="home-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Vehicles</IonTitle>
+          <IonTitle>Inbox</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -44,17 +44,17 @@ const Home: React.FC = () => {
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">
-              Vehicles
+              Inbox
             </IonTitle>
           </IonToolbar>
         </IonHeader>
 
         <IonList>
-          {vehicles.map(v => <VehicleListItem key={v.id} vehicle={v} />)}
+          {messages.map(m => <MessageListItem key={m.id} message={m} />)}
         </IonList>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default Messages;
