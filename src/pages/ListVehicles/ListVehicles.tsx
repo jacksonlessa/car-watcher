@@ -1,9 +1,11 @@
-import VehicleListItem from '../components/VehicleListItem';
-import { useState } from 'react';
-import { Vehicle, getVehicles } from '../data/vehicles';
+import VehicleListItem from '../../components/VehicleListItem';
+import { useEffect, useState } from 'react';
+import { Vehicle, getVehicles } from '../../data/vehicles';
 import {
   IonContent,
   IonHeader,
+  IonItem,
+  IonLabel,
   IonList,
   IonPage,
   IonRefresher,
@@ -12,16 +14,24 @@ import {
   IonToolbar,
   useIonViewWillEnter
 } from '@ionic/react';
-import './Home.css';
+import './ListVehicles.css';
 
-const Home: React.FC = () => {
+const ListVehicles: React.FC = () => {
 
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
   useIonViewWillEnter(() => {
-    const vehiclesList = getVehicles();
-    setVehicles(vehiclesList);
+    // const vehiclesList = getVehicles();
+    // setVehicles(vehiclesList);
   });
+  useEffect(() => {
+    async function doFetch() {
+      const result = await fetch('/assets/vehicles.json');
+      const data = await result.json();
+      setVehicles(data);
+    }
+    doFetch();
+  }, []);
 
   const refresh = (e: CustomEvent) => {
     setTimeout(() => {
@@ -33,7 +43,7 @@ const Home: React.FC = () => {
     <IonPage id="home-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Vehicles</IonTitle>
+          <IonTitle>Vehicles List</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -50,11 +60,19 @@ const Home: React.FC = () => {
         </IonHeader>
 
         <IonList>
-          {vehicles.map(v => <VehicleListItem key={v.id} vehicle={v} />)}
+          {vehicles.length === 0? (
+            <IonItem>
+              <IonLabel className="align-center">
+                No vehicles, add your first vehicle!
+              </IonLabel>
+            </IonItem>
+          ) : (
+            vehicles.map(v => <VehicleListItem key={v.id} vehicle={v} />)
+          )}
         </IonList>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default ListVehicles;

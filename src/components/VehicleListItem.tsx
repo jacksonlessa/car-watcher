@@ -18,7 +18,7 @@ const VehicleListItem: React.FC<VehicleListItemProps> = ({ vehicle }) => {
     <IonItem routerLink={`/vehicle/${vehicle.id}`} detail={false}>
       <IonLabel className="ion-text-wrap">
         <h2>
-          {vehicle.brand} - {vehicle.model} 
+          <span>{vehicle.brand} - {vehicle.model}</span>
           <IonChip color="secondary">
             <IonLabel>{vehicle.type}</IonLabel>
           </IonChip>

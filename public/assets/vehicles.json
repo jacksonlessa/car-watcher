@@ -1,0 +1,20 @@
+[
+  {
+    "type": "car",
+    "brand": "Peugeot",
+    "model": "206",
+    "mileage": 150000,
+    "year": 2006,
+    "plate": "AAA-0000",
+    "id": 0
+  },
+  {
+    "type": "motorcycle",
+    "brand": "Honda",
+    "model": "CG",
+    "mileage": 82000,
+    "year": 2012,
+    "plate": "BBB-1111",
+    "id": 1
+  }
+]

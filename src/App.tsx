@@ -1,7 +1,7 @@
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import ListVehicles from './pages/ListVehicles/ListVehicles';
 import Messages from './pages/Messages';
 import ViewMessage from './pages/ViewMessage';
 import ViewVehicle from './pages/ViewVehicle';
@@ -32,10 +32,10 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/" exact={true}>
-          <Redirect to="/home" />
+          <Redirect to="/vehicles" />
         </Route>
-        <Route path="/home" exact={true}>
-          <Home />
+        <Route path="/vehicles" exact={true}>
+          <ListVehicles />
         </Route>
         <Route path="/messages" exact={true}>
           <Messages />
