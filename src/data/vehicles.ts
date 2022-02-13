@@ -5,8 +5,9 @@ export interface Vehicle {
   mileage: number
   year: number
   plate: string;
-  id: number;
+  id: string;
 }
+
 
 const vehicles: Vehicle[] = [
   {
@@ -16,7 +17,7 @@ const vehicles: Vehicle[] = [
     mileage: 150000,
     year: 2006,
     plate: 'AAA-0000',
-    id: 0
+    id: "asadads"
   },
   {
     type: 'motorcycle',
@@ -25,10 +26,10 @@ const vehicles: Vehicle[] = [
     mileage: 82000,
     year: 2012,
     plate: 'BBB-1111',
-    id: 1
+    id: "asdasdaaa"
   },
 ];
 
 export const getVehicles = () => vehicles;
 
-export const getVehicle = (id: number) => vehicles.find(m => m.id === id);
+export const getVehicle = (id: string) => vehicles.find(m => m.id === id);

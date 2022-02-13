@@ -22,7 +22,7 @@ function ViewVehicle() {
   const params = useParams<{ id: string }>();
 
   useIonViewWillEnter(() => {
-    const car = getVehicle(parseInt(params.id, 10));
+    const car = getVehicle(params.id);
     setVehicle(car);
   });
 

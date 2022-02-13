@@ -31,7 +31,7 @@ test('when vehicles is loaded with vehicle, then the vehicle should be in the li
       mileage: 150000,
       year: 2006,
       plate: 'AAA-0000',
-      id: 0
+      id: "asdasd"
     },
     {
       type: 'motorcycle',
@@ -40,7 +40,7 @@ test('when vehicles is loaded with vehicle, then the vehicle should be in the li
       mileage: 82000,
       year: 2012,
       plate: 'BBB-1111',
-      id: 1
+      id: "asdasdasdasd"
     },
   ]
   mockFetch(vehiclesList);
