@@ -5,7 +5,7 @@ export interface Vehicle {
   mileage: number
   year: number
   plate: string;
-  id: string;
+  id?: string;
 }
 
 

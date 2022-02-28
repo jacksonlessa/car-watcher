@@ -16,6 +16,8 @@ import {
   IonPage,
   IonRefresher,
   IonRefresherContent,
+  IonSelect,
+  IonSelectOption,
   IonTitle,
   IonToolbar,
   useIonViewWillEnter
@@ -23,13 +25,23 @@ import {
 import './ListVehicles.css';
 import { add } from 'ionicons/icons';
 import {vehicleCollectionRef} from '../../firebase-config';
-import { getDocs } from '@firebase/firestore';
+import { getDocs, addDoc } from '@firebase/firestore';
 
 const ListVehicles: React.FC = () => {
 
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
   const [showModal, setShowModal] = useState(false);
+  
+
+  const [type, setType] = useState<string>('');
+  const [brand, setBrand] = useState<string>('');
+  const [model, setModel] = useState<string>('');
+  const [mileage, setMileage] = useState<number>(0);
+  const [year, setYear] = useState<number>(2022);
+  const [plate, setPlate] = useState<string>('');
+
+
 
   useIonViewWillEnter(() => {
     // const vehiclesList = getVehicles();
@@ -50,22 +62,26 @@ const ListVehicles: React.FC = () => {
     }, 3000);
   };
 
-  const [text, setText] = useState('');
 
-  const addTodo = () => {
+  const createVehicle = async () => {
     // const nextId = todos.reduce((id, todo) => Math.max(id, todo.id!), 0) + 1;
     const vehicle: Vehicle = {
-        type: 'car',
-        brand: 'Peugeot',
-        model: '206',
-        mileage: 150000,
-        year: 2006,
-        plate: 'AAA-0000',
-        id: "asadads"
+        type: type,
+        brand: brand,
+        model: model,
+        mileage: mileage,
+        year: year,
+        plate: plate,
     };
+    await addDoc(vehicleCollectionRef, vehicle)
     // setTodos([...todos, todo]);
     setShowModal(false);
-    setText('');
+    setType("")
+    setBrand("")
+    setModel("")
+    setMileage(0)
+    setYear(2022)
+    setPlate("")
   };
 
   return (
@@ -102,7 +118,7 @@ const ListVehicles: React.FC = () => {
 
 
         <IonFab vertical="bottom" horizontal="end">
-          <IonFabButton title="Add Todo" onClick={() => setShowModal(true)}>
+          <IonFabButton title="Add Vehicle" onClick={() => setShowModal(true)}>
             <IonIcon data-icon="add" icon={add} />
           </IonFabButton>
         </IonFab>
@@ -111,16 +127,49 @@ const ListVehicles: React.FC = () => {
           isOpen={showModal}
         >
           <IonToolbar>
-            <IonTitle>Add Todo</IonTitle>
+            <IonTitle>Add Vehicle</IonTitle>
           </IonToolbar>
           <IonContent>
             <IonList>
               <IonItem>
-                <IonLabel position="stacked">Todo</IonLabel>
-                <IonInput id="todo" title="Todo Text" value={text} onIonChange={e => setText(e.detail.value!)} />
+                <IonLabel position="stacked">Type</IonLabel>
+                <IonSelect value={type} placeholder="Select One" onIonChange={e => setType(e.detail.value)}>
+                  <IonSelectOption value="car">Car</IonSelectOption>
+                  <IonSelectOption value="motorcycle">Motorcycle</IonSelectOption>
+                </IonSelect>
               </IonItem>
             </IonList>
-            <IonButton expand="block" onClick={addTodo}>
+            <IonList>
+              <IonItem>
+                <IonLabel position="stacked">Brand</IonLabel>
+                <IonInput title="Brand" value={brand} onIonChange={e => setBrand(e.detail.value!)} />
+              </IonItem>
+            </IonList>
+            <IonList>
+              <IonItem>
+                <IonLabel position="stacked">Model</IonLabel>
+                <IonInput title="Model" value={model} onIonChange={e => setModel(e.detail.value!)} />
+              </IonItem>
+            </IonList>
+            <IonList>
+              <IonItem>
+                <IonLabel position="stacked">Mileage</IonLabel>
+                <IonInput type="number" title="Mileage" value={mileage} onIonChange={e => setMileage(parseInt(e.detail.value!, 10))} />
+              </IonItem>
+            </IonList>
+            <IonList>
+              <IonItem>
+                <IonLabel position="stacked">Year</IonLabel>
+                <IonInput type="number" title="Year" value={year} onIonChange={e => setYear(parseInt(e.detail.value!, 10))} max="2030"/>
+              </IonItem>
+            </IonList>
+            <IonList>
+              <IonItem>
+                <IonLabel position="stacked">Plate</IonLabel>
+                <IonInput title="Plate" value={plate} onIonChange={e => setPlate(e.detail.value!)} />
+              </IonItem>
+            </IonList>
+            <IonButton expand="block" onClick={createVehicle}>
               Save
             </IonButton>
           </IonContent>
